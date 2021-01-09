@@ -39,12 +39,14 @@ describe('Login Router', () => {
     const httpResponse = sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
   })
+
   test('Should return 500 if no httpRequest is provided', () => {
     const { sut } = makeSut()
 
     const httpResponse = sut.route()
     expect(httpResponse.statusCode).toBe(500)
   })
+
   test('Should return 500 if no httpRequest is provided', () => {
     const { sut } = makeSut()
 
@@ -52,6 +54,7 @@ describe('Login Router', () => {
     const httpResponse = sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
   })
+
   test('Should call AuthUseCase with correct params', () => {
     const { sut, authUseCaseSpy } = makeSut()
 
@@ -63,5 +66,19 @@ describe('Login Router', () => {
     }
     sut.route(httpRequest)
     expect(authUseCaseSpy.email).toBe(httpRequest.body.email)
+  })
+
+  test('Should return 401 when invalid credentials are provided', () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: {
+        email: 'invalid_email@email.com',
+        password: 'invalid_password'
+      }
+    }
+
+    const httpResponse = sut.route(httpRequest)
+    expect(httpResponse.statusCode).toBe(401)
   })
 })
