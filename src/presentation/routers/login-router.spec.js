@@ -154,8 +154,8 @@ describe('Login Router', () => {
 
     const httpRequest = {
       body: {
-        email: 'invalid_email@email.com',
-        password: 'invalid_password'
+        email: 'any@email.com',
+        password: 'any_password'
       }
     }
 
@@ -170,8 +170,8 @@ describe('Login Router', () => {
     const sut = new LoginRouter(authUseCaseSpy)
     const httpRequest = {
       body: {
-        email: 'invalid_email@email.com',
-        password: 'invalid_password'
+        email: 'any_email@email.com',
+        password: 'any_password'
       }
     }
 
